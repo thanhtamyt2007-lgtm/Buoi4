@@ -1,0 +1,19 @@
+GHI CHÚ VỀ THIẾT KẾ FIGMA
+==========================
+
+File "wireframe-blog-ca-nhan.png" trong thư mục này là bản PHÁC THẢO BỐ CỤC
+(wireframe) thay thế tạm thời, được tạo để định vị số lượng section, vị trí
+từng khối (Header, Hero, Giới thiệu, Kỹ năng, Dự án, Timeline, Bài viết,
+Aside, Footer) trước khi code — vì môi trường thực hiện bài này không có
+kết nối mạng để truy cập Figma.
+
+VIỆC BẠN CẦN LÀM TRƯỚC KHI NỘP BÀI:
+1. Mở Figma, tạo file thiết kế mockup hoàn chỉnh (màu sắc, font chữ,
+   khoảng cách, ảnh minh hoạ) dựa theo bố cục trong wireframe ở trên và
+   theo đúng cấu trúc HTML/CSS đã code trong thư mục html/ và css/.
+2. Chia sẻ file ở chế độ xem (view-only) rồi dán đường link vào bên dưới:
+
+   Link Figma: [DÁN LINK CHIA SẺ CỦA BẠN VÀO ĐÂY]
+
+3. (Tuỳ chọn) Export các khung hình chính từ Figma thành ảnh PNG/JPG và
+   để trong thư mục này để nộp kèm ảnh chụp màn hình thiết kế.

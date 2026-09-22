@@ -1,0 +1,471 @@
+/* =====================================================================
+   BÀI TẬP 1 - WEBSITE THỰC ĐƠN QUÁN CÀ PHÊ / NHÀ HÀNG
+   File: style.css
+
+   DANH SÁCH CÁC LOẠI SELECTOR CSS3 ĐÃ SỬ DỤNG TRONG FILE NÀY
+   (mỗi vị trí sử dụng đều có chú thích riêng ngay tại dòng áp dụng):
+     1. Universal selector      (*)
+     2. Type/Tag selector       (vd: h1, p, img...)
+     3. Id selector             (#id)
+     4. Class selector          (.class)
+     5. Descendant selector     (A B)
+     6. Child selector          (A > B)
+     7. Group selector          (A, B)
+     8. Adjacent sibling        (A + B)
+     9. Pseudo-class            (:hover, :first-child, :nth-child...)
+    10. Pseudo-element          (::before, ::after)
+   ===================================================================== */
+
+/* 1. UNIVERSAL SELECTOR: reset margin/padding & box-sizing cho toàn trang */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. TYPE SELECTOR (tag): áp dụng font mặc định cho toàn thẻ body */
+body {
+  font-family: "Segoe UI", Verdana, Arial, sans-serif;
+  color: #3b2417;
+  background-color: #faf6ef;
+  line-height: 1.6;
+}
+
+/* 2. TYPE SELECTOR (tag): định dạng chung cho toàn bộ ảnh */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* 7. GROUP SELECTOR: gộp chung style tiêu đề h1, h2, h3, h4 */
+h1, h2, h3, h4 {
+  font-family: Georgia, "Times New Roman", serif;
+  color: #2b1a12;
+  font-weight: 700;
+}
+
+/* ===================== HEADER / BANNER ===================== */
+
+/* 3. ID SELECTOR: khối header chính (id duy nhất trên trang) */
+#trang-chu {
+  display: block;
+}
+
+/* 4. CLASS SELECTOR + đa background-image (multiple background images)
+   kết hợp banner ảnh quán + lớp phủ gradient tối để chữ dễ đọc */
+.site-header {
+  background-image:
+    linear-gradient(180deg, rgba(20, 12, 8, 0.55), rgba(20, 12, 8, 0.85)),
+    url("../images/banner-quan.jpg");
+  background-size: cover;           /* background-size */
+  background-position: center 40%;  /* background-position */
+  background-repeat: no-repeat;
+  padding: 28px 6%;
+  color: #f5ead9;
+}
+
+/* 6. CHILD SELECTOR (>): chỉ áp dụng cho div.header-inner con trực tiếp của .site-header */
+.site-header > .header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 5. DESCENDANT SELECTOR: mọi phần tử .brand nằm bên trong .header-inner */
+.header-inner .brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* border-radius + box-shadow áp dụng cho logo (ảnh minh họa quán) */
+.logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;               /* border-radius */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45); /* box-shadow */
+  border: 2px solid #c9973e;
+}
+
+.brand-text h1 {
+  color: #f5ead9;
+  font-size: 1.9rem;
+  letter-spacing: 0.5px;
+}
+
+/* 9. PSEUDO-ELEMENT (::after): thêm dấu gạch trang trí phía dưới slogan */
+.slogan {
+  font-style: italic;
+  color: #e3cba3;
+  font-size: 0.95rem;
+  position: relative;
+  padding-bottom: 8px;
+}
+.slogan::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 46px;
+  height: 3px;
+  background: #c9973e;
+}
+
+/* ===================== NAVIGATION ===================== */
+
+/* 5. DESCENDANT SELECTOR: ul nằm bên trong nav.main-nav */
+.main-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+/* 6. CHILD SELECTOR (>): chỉ chọn li là con trực tiếp của ul trong nav,
+   tránh ảnh hưởng tới các ul lồng khác trong trang */
+.main-nav ul > li {
+  position: relative;
+}
+
+.main-nav a {
+  color: #f5ead9;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 6px 2px;
+}
+
+/* 9. PSEUDO-CLASS (:hover): đổi màu link khi rê chuột */
+.main-nav a:hover {
+  color: #e0813a;
+}
+
+/* 10. PSEUDO-ELEMENT (::before): gạch chân mọc dần khi hover menu */
+.main-nav a::before {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 0;
+  background: #e0813a;
+  transition: width 0.25s ease;
+  margin-top: 4px;
+}
+.main-nav a:hover::before {
+  width: 100%;
+}
+
+/* 9. PSEUDO-CLASS (:first-child): mục menu đầu tiên không cần margin-left */
+.main-nav ul > li:first-child {
+  margin-left: 0;
+}
+
+/* ===================== LAYOUT CHUNG ===================== */
+
+.page-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 6%;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 40px;
+  align-items: start;
+}
+
+/* 4. CLASS SELECTOR + background-origin/background-clip:
+   tiêu đề trang có nền ảnh chỉ tô trong vùng padding-box (không lan ra border) */
+.page-title {
+  font-size: 2rem;
+  margin-bottom: 28px;
+  padding: 18px 24px;
+  color: #f5ead9;
+  background-color: #4a2c1a;
+  background-image: url("../images/section-title-bg.jpg");
+  background-size: cover;
+  background-origin: padding-box;   /* background-origin */
+  background-clip: padding-box;     /* background-clip   */
+  border: 10px solid transparent;
+  border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(43, 26, 18, 0.25);
+}
+
+/* ===================== SECTION THỰC ĐƠN ===================== */
+
+.menu-section {
+  margin-bottom: 44px;
+}
+
+/* 4. CLASS SELECTOR + background-origin/background-clip khác:
+   nền chỉ hiển thị trong content-box của tiêu đề section, viền dày để thấy rõ khác biệt */
+.section-title {
+  font-size: 1.35rem;
+  color: #4a2c1a;
+  border-bottom: 3px double #c9973e;
+  padding: 10px 14px 10px 50px;
+  margin-bottom: 22px;
+  background-color: #f0e2c8;
+  background-image: url("../images/bean-tile.png");
+  background-repeat: no-repeat;
+  background-position: 12px center;
+  background-size: 26px 26px;
+  background-origin: content-box;   /* background-origin */
+  background-clip: content-box;     /* background-clip   */
+}
+
+.dish-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 26px;
+}
+
+/* 4. CLASS SELECTOR: thẻ card món ăn (article) - border-radius + box-shadow */
+.dish-card {
+  background: #ffffff;
+  border-radius: 16px;              /* border-radius */
+  box-shadow: 0 6px 18px rgba(43, 26, 18, 0.12); /* box-shadow */
+  overflow: hidden;
+  padding-bottom: 16px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* 9. PSEUDO-CLASS (:hover): hiệu ứng nổi bật + đổ bóng đậm hơn khi rê chuột vào card */
+.dish-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(43, 26, 18, 0.25);
+}
+
+/* 5. DESCENDANT SELECTOR: ảnh món ăn nằm trong .dish-card, bo góc riêng phía trên */
+.dish-card .dish-img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;     /* border-radius riêng cho ảnh */
+}
+
+.dish-name {
+  font-size: 1.05rem;
+  margin: 14px 16px 6px;
+  color: #2b1a12;
+}
+
+.dish-desc {
+  font-size: 0.88rem;
+  color: #6b5544;
+  margin: 0 16px 12px;
+  min-height: 42px;
+}
+
+/* 4. CLASS SELECTOR: giá tiền có class riêng (span.price) */
+.price {
+  display: inline-block;
+  margin: 0 16px;
+  font-weight: 700;
+  color: #b05429;
+}
+
+/* 8. ADJACENT SIBLING SELECTOR (+): nút "Đặt món" đứng ngay sau span.price
+   trong cùng article -> chỉ áp dụng margin-left cho trường hợp này */
+.price + .btn-order {
+  margin-left: 12px;
+}
+
+.btn-order {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 999px;             /* border-radius (nút bo tròn) */
+  background-color: #e0813a;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(224, 129, 58, 0.4); /* box-shadow */
+}
+
+/* 9. PSEUDO-CLASS (:hover): nút đặt món đổi màu khi hover */
+.btn-order:hover {
+  background-color: #b05429;
+}
+
+/* 9. PSEUDO-CLASS (:nth-child): tô nhẹ nền xen kẽ cho các card ở vị trí lẻ */
+.dish-grid .dish-card:nth-child(odd) {
+  border-top: 4px solid #c9973e;
+}
+.dish-grid .dish-card:nth-child(even) {
+  border-top: 4px solid #4a2c1a;
+}
+
+/* ===================== ASIDE ===================== */
+
+.sidebar > div {
+  margin-bottom: 28px;
+}
+
+.fav-box {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(43, 26, 18, 0.1);
+  padding: 20px;
+}
+
+.fav-box h3 {
+  font-size: 1.05rem;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #f0e2c8;
+}
+
+.fav-list {
+  list-style: none;
+}
+
+/* 5. DESCENDANT SELECTOR: li bên trong ul.fav-list */
+.fav-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.fav-list li img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 10px;              /* border-radius */
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15); /* box-shadow */
+}
+
+.fav-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2b1a12;
+}
+
+/* 6. CHILD SELECTOR (>): chỉ áp dụng margin-bottom:0 cho li cuối cùng - con trực tiếp */
+.fav-list > li:last-child {
+  margin-bottom: 0;
+}
+
+/* 4. CLASS SELECTOR + BORDER-IMAGE: khung viền trang trí cho khối "Khuyến mãi" */
+.promo-box {
+  background-color: #b05429;
+  background-image:
+    linear-gradient(160deg, rgba(224,129,58,0.92), rgba(176,84,41,0.95)),
+    url("../images/khuyenmai-bg.jpg");
+  background-size: cover;
+  color: #fff5e9;
+  padding: 22px;
+  border: 10px solid;
+  border-image: repeating-linear-gradient(
+    45deg,
+    #f5ead9 0 10px,
+    #c9973e 10px 20px
+  ) 20;                              /* border-image */
+  border-radius: 4px;
+}
+
+.promo-box h3 {
+  color: #fff5e9;
+  margin-bottom: 10px;
+}
+
+.promo-box p {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.promo-code {
+  display: inline-block;
+  background: rgba(255,255,255,0.18);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* ===================== FOOTER ===================== */
+
+/* 4. CLASS SELECTOR + multiple background images: hoạ tiết hạt cà phê lặp lại
+   kết hợp với nền gradient màu nâu đậm cho footer */
+.site-footer {
+  background-image:
+    url("../images/bean-tile.png"),
+    linear-gradient(180deg, #2b1a12, #1b100a);
+  background-repeat: repeat, no-repeat;
+  background-size: 80px 80px, cover;
+  background-position: top left, center;
+  color: #e3cba3;
+  padding: 40px 6% 20px;
+  margin-top: 20px;
+}
+
+.footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  padding-bottom: 24px;
+}
+
+.footer-col h4 {
+  color: #f5ead9;
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+}
+
+.footer-col p {
+  font-size: 0.88rem;
+  margin-bottom: 6px;
+  color: #cbb08a;
+}
+
+.social-list {
+  list-style: none;
+}
+
+.social-list li {
+  margin-bottom: 8px;
+}
+
+.social-list a {
+  color: #e3cba3;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+/* 9. PSEUDO-CLASS (:hover): liên kết mạng xã hội đổi màu khi hover */
+.social-list a:hover {
+  color: #e0813a;
+  text-decoration: underline;
+}
+
+/* 7. GROUP SELECTOR: gộp style viền trên cho dòng bản quyền */
+.copyright {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #a98a63;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 16px;
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 860px) {
+  .page-layout {
+    grid-template-columns: 1fr;
+  }
+  .header-inner {
+    justify-content: center;
+    text-align: center;
+  }
+  .main-nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
